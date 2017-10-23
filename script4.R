@@ -39,3 +39,10 @@ require(MASS) # use it to prepare the homework
 data(birthwt)
 View(birthwt)
 ?birthwt
+
+hist(velo$psaavt, col="lightblue")
+hist(velo$psaavt, col=grey((0:13)/13), breaks=0:14)
+hist(velo$psaavt, col=grey((0:13)/13), breaks=seq(0, max(velo$psaavt+0.5), by=0.5))
+boxplot(velo$psaavt~(velo$Poids < 70), main="Boxplot of PSA av totaux",
+        col=c("blue", "red"),
+        names=c("Poids >= 70", "Poids < 70"))
