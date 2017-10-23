@@ -29,7 +29,9 @@ plot(xx, yy, col=1:12, pch=19, cex=3, type="b", lwd=6,
 velo <- read.delim("C:/Users/169/Desktop/velo.txt", dec=",")
 plot(velo$psaavt, velo$psaavl, col="red", pch=19, main="PSA libres vs PSA totaux", xlab="Dosage PSA totaux", ylab="Dosage PSA libres",
      xlim=c(0,25), ylim=c(0,3))
+points(velo$psaavt[velo$Poids < 70], velo$psaavl[velo$Poids < 70], col="pink", pch=19) # Plots on a an existing plot
 points(velo$psaapt, velo$psaapl, col="blue", pch=19) # Plots on a an existing plot
 legend(15, 2, legend=c("PSA Av", "PSA ap"), 
        col=c("red", "blue"), pch=19)
 abline(h=2, col="green", lwd=2) #Adds a horizontal line
+
