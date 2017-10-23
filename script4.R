@@ -35,3 +35,7 @@ legend(15, 2, legend=c("PSA Av", "PSA ap"),
        col=c("red", "blue"), pch=19)
 abline(h=2, col="green", lwd=2) #Adds a horizontal line
 
+require(MASS) # use it to prepare the homework
+data(birthwt)
+View(birthwt)
+?birthwt
