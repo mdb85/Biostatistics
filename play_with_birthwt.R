@@ -47,3 +47,8 @@ legend(x = 45,
 abline(h = 1, col = "blue", lwd = 2)
 abline(h = 2, col = "green", lwd = 2)
 abline(h = 3, col = "purple", lwd = 2)
+
+X11()
+boxplot(babyWeightKg~birthwt$smoke,
+        col = c("red", "blue"),
+        names = c("Non smoking", "Smoking"))
