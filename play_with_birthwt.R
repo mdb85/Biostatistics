@@ -44,9 +44,9 @@ legend(x = 45,
        legend = c("Baby"),
        col = c("red"),
        pch = 19)
-abline(h = 1, col = "blue", lwd = 2)
-abline(h = 2, col = "green", lwd = 2)
-abline(h = 3, col = "purple", lwd = 2)
+abline(h = 1, col = "blue", lwd = 3, lty = 2)
+abline(h = 2, col = "green", lwd = 3, lty = 2)
+abline(h = 3, col = "purple", lwd = 3, lty = 2)
 
 X11()
 boxplot(babyWeightKg~birthwt$smoke,
