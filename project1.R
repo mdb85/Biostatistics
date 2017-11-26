@@ -85,56 +85,64 @@ median(sofa)
 quantile(sofa, probs=c(0.25, 0.75))
 sd(sofa)
 
-hist_quantitative <- function(xx, name) {
+hist_quantitative <- function(xx, name, unit, xxlim, yylim, seq) {
   xx_safe <- xx[!is.na(xx)]
   xx_safe_median <- median(xx_safe)
   xx_safe_quantile <- quantile(xx_safe, probs=c(0.25, 0.75))
   xx_safe_sd <- sd(xx_safe)
   hist(xx_safe,
        col = grey(0.7),
-       xlab = name,
-       ylab = "Nombre",
+       xlab = paste(name, unit),
+       ylab = "Frequence",
+       xlim = xxlim,
+       ylim = yylim,
        main = paste("Histogramme ", name, sep = " "),
-       breaks = seq(min(xx_safe)-10, max(xx_safe)+10, by=5))
+       breaks = seq)
   abline(v = xx_safe_median, col = "blue", lwd = 3, lty = 2)
   abline(v = xx_safe_quantile[1], col = "green", lwd = 3, lty = 2)
   abline(v = xx_safe_quantile[2], col = "red", lwd = 3, lty = 2)  
 }
 
-hist_quantitative(base$AGE, "AGE")
+#breaks = seq(min(xx_safe)-xx_safe_sd, max(xx_safe)+xx_safe_sd)
 
 ## Histo AGE
-age <- base$AGE[!is.na(base$AGE)]
-age_m <- median(age)
-age_quantile <- quantile(age, probs=c(0.25, 0.75))
-sd(age)
-hist(age,
-     col = grey(0.7),
-     xlab = "AGE",
-     ylab = "Nombre",
-     main = "Distribution de l'age",
-     breaks = seq(0, 100, by=5))
-abline(v = age_m, col = "blue", lwd = 3, lty = 2)
-abline(v = age_quantile[1], col = "green", lwd = 3, lty = 2)
-abline(v = age_quantile[2], col = "red", lwd = 3, lty = 2)
+hist_quantitative(base$AGE, "AGE", "(ans)",c(0, 100), c(0, 35), seq(10, 100, by=2))
 
 ## Histo PH
-ph <- base$PH[!is.na(base$PH)]
-ph_m <- median(ph)
-ph_quantile <- quantile(ph, probs=c(0.25, 0.75))
-sd(ph)
-hist(ph,
-     col = grey(0.7),
-     xlab = "PH",
-     ylab = "Nombre",
-     main = "Distribution du PH",
-     breaks = seq(0, 100, by=5))
-abline(v = ph_m, col = "blue", lwd = 3, lty = 2)
-abline(v = ph_quantile[1], col = "green", lwd = 3, lty = 2)
-abline(v = ph_quantile[2], col = "red", lwd = 3, lty = 2)
+hist_quantitative(base$PH, "PH", "", c(6.8, 7.8), c(0, 120), seq(6.8, 7.8, by=0.05))
 
 ## Histo NA
-na <- base$NA.[!is.na(base$NA.)]
-na_m <- median(na)
-na_quantile <- quantile(na, probs=c(0.25, 0.75))
-sd(na)
+hist_quantitative(base$NA., "NA", "(mmol/l)", c(100, 180), c(0, 80),seq(100, 180, by=0.1))
+
+## Histo TEMPERATURE
+hist_quantitative(base$TEMPERATURE, "TEMPERATURE", "(°C)", c(28, 42), c(0, 25), seq(28, 42, by=0.1))
+
+## Histo K
+hist_quantitative(base$K, "K", "(mmol/l)", c(0, 10), c(0, 40), seq(0, 10, by=0.1))
+
+## Histo BILIRUBINE
+hist_quantitative(base$BILIRUBINE, "BILIRUBINE", "(mg/l)", c(0, 32), c(0, 160), seq(0, 32, by=0.5))
+
+## Histo UREE
+hist_quantitative(base$UREE, "UREE", "(mmol/l)", c(0, 22), c(0, 80), seq(0, 22, 0.5))
+
+## HISTO HT
+hist_quantitative(base$HT, "HT", "(%)", c(0, 60), c(0, 50), seq(0, 60, 1))
+
+## HISTO WBC
+hist_quantitative(base$WBC, "WBC", "(10^3/mm^3)", c(0, 70), c(0, 50), seq(0, 70, 1))
+
+## HISTO PAM
+hist_quantitative(base$PAM, "PAM", "(mmHg)", c(0, 300), c(0, 50), seq(0, 300, 5))
+
+## HISTO FC
+hist_quantitative(base$FC, "FC", "(mmol/l)", c(0, 180), c(0, 80), seq(0, 180, 5))
+
+## HISTO GCS
+hist_quantitative(base$GCS, "GCS", "", c(0, 6), c(0, 250), seq(0, 6, 1))
+
+## HISTO SAPS
+hist_quantitative(base$SAPS, "SAPS", "", c(0, 100), c(0, 100), seq(0, 100, 5))
+
+## HISTO SOFA_INIT
+hist_quantitative(base$SOFA_INIT, "SOFA_INIT", "", c(0, 30), c(0, 150), seq(0, 30, 2))
