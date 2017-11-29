@@ -1,5 +1,4 @@
 base <- read.csv2("~/../Desktop/Biostatistics/base_projet1.csv")
-base_without_na <- na.omit(base)
 base$SEXE
 summary(base)
 length(base$SEXE)
@@ -187,3 +186,18 @@ legend(x = 170,
        legend = c("Femme", "Homme"),
        col = c("red", "blue"),
        pch = 19)
+
+## 7- Représentation graphique de la distribution des départements d'origine
+barplot(table(base$DEPARTEMENT),
+        main = "Distribution des départements d'origine",
+        xlab = "Département",
+        ylab = "Nombre")
+barplot(table(base$SEXE),
+        main = "Distribution des sexes",
+        xlab = "Sexe",
+        ylab = "Nombre",
+        col = c("red", "blue"))
+## 8- Représentation graphique de SAPS en fonction de SOFA
+reduced_base <- base[,c("SAPS", "SOFA_INIT")]
+reduced_base_without_NA <- na.omit(reduced_base) 
+boxplot(reduced_base_without_NA$SAPS~reduced_base_without_NA$SOFA_INIT)
