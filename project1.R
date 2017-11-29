@@ -1,4 +1,5 @@
-base <- read.csv2("/home/mdb/Sources/Biostatistics/base_projet1.csv")
+base <- read.csv2("~/../Desktop/Biostatistics/base_projet1.csv")
+base_without_na <- na.omit(base)
 base$SEXE
 summary(base)
 length(base$SEXE)
@@ -146,3 +147,43 @@ hist_quantitative(base$SAPS, "SAPS", "", c(0, 100), c(0, 100), seq(0, 100, 5))
 
 ## HISTO SOFA_INIT
 hist_quantitative(base$SOFA_INIT, "SOFA_INIT", "", c(0, 30), c(0, 150), seq(0, 30, 2))
+
+## 4- Distribution de l'age en fonction du bras de randomisation
+hist_quantitative(base$AGE[base$TRAITEMENT == "A"], "AGE", "(ans)",c(0, 100), c(0, 35), seq(10, 100, by=2))
+hist_quantitative(base$AGE[base$TRAITEMENT == "B"], "AGE", "(ans)",c(0, 100), c(0, 35), seq(10, 100, by=2))
+boxplot(base$AGE~base$TRAITEMENT,
+        col = c("lightblue", "pink"),
+        names=c("Traitement A", "Traitement B"),
+        main = "Age en fonction du traitement")
+
+## 5- Distribution de l'age en fonction d'une admission en urgence ou non
+boxplot(base$AGE~base$ADMISSION_URGENT,
+        col = c("lightblue", "pink"),
+        names=c("Pas d'urgence", "Urgence"),
+        main = "Age en fonction d'une admission en urgence")
+
+## 6- Répresenter la PAM en fonction de la FC
+FC_Homme <- base$FC[base$SEXE == "M"]
+FC_Homme_sans_NA <- FC_Homme[!is.na(FC_Homme)]
+age_Homme_sans_NA <- base$AGE[FC_Homme_sans_NA]
+FC_Femme <- base$FC[base$SEXE == "F"]
+FC_Femme_sans_NA <- FC_Femme[!is.na(FC_Femme)]
+age_Femme_sans_NA <- base$AGE[FC_Femme_sans_NA]
+plot(FC_Homme_sans_NA,
+     age_Homme_sans_NA,
+     col = "blue",
+     pch = 19,
+     main = "Age en fonction de la FC",
+     xlab = "FC (battement/mn)", 
+     ylab = "Age (ans)",
+     xlim = c(10, 250),
+     ylim = c(0, 160))
+points(FC_Femme_sans_NA,
+       age_Femme_sans_NA,
+       col = "red",
+       pch = 19)
+legend(x = 170,
+       y = 140,
+       legend = c("Femme", "Homme"),
+       col = c("red", "blue"),
+       pch = 19)
